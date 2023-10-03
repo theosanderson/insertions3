@@ -1,0 +1,19 @@
+# Ignore all log files
+*.log
+
+# Ignore all files with .tbl extension
+*.tbl
+
+# Ignore all files in the output directory
+/output/*
+
+# Ignore specific files within the data/transcriptomes directory
+/data/transcriptomes/*/concatenated.fasta.gz
+
+# Ignore all files with .nhr, .nin, and .nsq extensions in the blast_db directory
+/blast_db/*.nhr
+/blast_db/*.nin
+/blast_db/*.nsq
+
+# You can add more patterns and specific file/directory names as needed
+.snakemake/**
