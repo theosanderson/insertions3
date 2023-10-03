@@ -31,12 +31,16 @@ for tbl_file in tbl_files:
     # Filter the DataFrame to keep only the top bit score for each query_id
     df_blast = df_blast.loc[df_blast.groupby("query_id")["bit_score"].idxmax()]
     
-    # Merge the BLAST results with the filtered_insertions DataFrame, adding a new column for the bit score
-    df_insertions = pd.merge(df_insertions, df_blast[["query_id", "bit_score"]], 
+    # Merge the BLAST results with the filtered_insertions DataFrame, adding new columns for the bit score, percentage identity, and alignment length
+    df_insertions = pd.merge(df_insertions, df_blast[["query_id", "bit_score", "percentage_identity", "alignment_length"]], 
                              left_on="insertion_id", right_on="query_id", how="left")
     
-    # Rename the bit_score column to include the transcriptome name
-    df_insertions = df_insertions.rename(columns={"bit_score": f"bit_score_{transcriptome}"})
+    # Rename the columns to include the transcriptome name
+    df_insertions = df_insertions.rename(columns={
+        "bit_score": f"bit_score_{transcriptome}",
+        "percentage_identity": f"percentage_identity_{transcriptome}",
+        "alignment_length": f"alignment_length_{transcriptome}"
+    })
     
     # Drop the extra query_id column
     df_insertions = df_insertions.drop(columns=["query_id"])

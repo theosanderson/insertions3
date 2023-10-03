@@ -88,7 +88,7 @@ filtered = list(map(add_episeq, filtered))
 
 with open(args.output_csv, 'wt') as f:
 
-    f.write('insertion_id,pos,seq,count,epi_isl\n')
+    f.write('insertion_id,pos,seq,count,string,epi_isl\n')
 
     for insertion in filtered:
 
